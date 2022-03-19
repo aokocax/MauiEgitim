@@ -1,0 +1,8 @@
+﻿@page "/routing/{id?}"
+<a href="/"> &lt; Back </a>
+<h3>Routing</h3>
+<h2>@id</h2>
+@code {
+    [Parameter]
+    public string id { get; set; }
+}

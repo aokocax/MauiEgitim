@@ -1,0 +1,38 @@
+﻿@page "/permission"
+@using Android.Hardware
+
+<a href="/"> &lt; Back </a>
+
+<h3>Permission</h3>
+<button onclick="@GetPermission">Permission test</button><br />
+<button onclick="@ShowImage">Show Image</button><br />
+<img src="@source" />
+@code {
+    string source;
+    async Task<PermissionStatus> GetPermission()
+    {
+        var readStatus = Permissions.RequestAsync<Permissions.Photos>();
+	
+        if (readStatus.Result != PermissionStatus.Granted)
+        {
+            await Application.Current.MainPage.DisplayAlert("Yetki", "Yetki sağlanamadı", "OK");
+
+        }
+        return await readStatus;
+
+	}
+	async void ShowImage()
+	{
+		if (GetPermission().Result==PermissionStatus.Granted)
+		{
+			var result = await FilePicker.PickAsync();
+
+			var byteArray = File.ReadAllBytes(result.FullPath);
+
+			source ="data:image/jpg;base64,"+ Convert.ToBase64String(byteArray);
+
+			StateHasChanged();
+		}
+		
+	}
+}

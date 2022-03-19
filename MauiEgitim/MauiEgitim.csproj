@@ -69,4 +69,10 @@
 	  <PackageReference Include="Plugin.LocalNotification" Version="9.2.1-preview01" />
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android'">
+	  <PackageReference Include="Plugin.CurrentActivity">
+	    <Version>2.1.0.4</Version>
+	  </PackageReference>
+	</ItemGroup>
+
 </Project>
