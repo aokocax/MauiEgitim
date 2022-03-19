@@ -1,0 +1,18 @@
+﻿@page "/dialogbox"
+<a href="/"> &lt; Back </a>
+<h3>Dialogbox</h3>
+<button onclick="@ShowDialog">Show Dialog</button>
+@if (IsShow)
+{
+    <h1>Showed</h1>
+}
+
+@code {
+    public bool IsShow = false;
+
+    private async void ShowDialog()
+    {
+        IsShow = await Application.Current.MainPage.DisplayAlert("Başlık", "Mesaj", "Tamam", "İptal");
+        StateHasChanged();
+    }
+}
