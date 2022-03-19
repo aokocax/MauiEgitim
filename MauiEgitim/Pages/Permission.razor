@@ -11,6 +11,7 @@
     async Task<PermissionStatus> GetPermission()
     {
         var readStatus = Permissions.RequestAsync<Permissions.Photos>();
+		
 	
         if (readStatus.Result != PermissionStatus.Granted)
         {

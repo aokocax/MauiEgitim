@@ -1,0 +1,17 @@
+﻿@page "/binding"
+<a href="/"> &lt; Back </a>
+
+<h3>Binding</h3>
+
+<MyChildComponent title="@parentTitle"></MyChildComponent>
+
+
+<hr />
+<h4>Parent Title= @parentTitle</h4>
+
+<input type="text" @bind="parentTitle" />
+@code {
+    string parentTitle { get; set; } = "parent";
+
+
+}

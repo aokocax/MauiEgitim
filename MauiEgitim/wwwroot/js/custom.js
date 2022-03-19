@@ -8,8 +8,6 @@ function MyFunc() {
     alert('hello');
 }
 
-
-
 //call dotnet code from javascript
 
 
