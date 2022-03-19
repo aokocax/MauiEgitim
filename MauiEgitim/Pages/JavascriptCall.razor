@@ -1,0 +1,22 @@
+﻿@page "/javascriptcall"
+@inject IJSRuntime JS
+
+<a href="/"> &lt; Back </a>
+
+<h1>Javascript call from .net code</h1>
+
+<button onclick="@AlertTest">Alert Test </button>
+<button onclick="@(()=> AlertTestParametreli("parametrem"))">Alert Test Backend Parametreli</button>
+
+
+@{
+    async void  AlertTest()
+    {
+        await JS.InvokeVoidAsync("MyFunc");
+    }
+
+    async void AlertTestParametreli(string parametre)
+    {
+         await JS.InvokeVoidAsync("MyFuncWithParams","Hello MAUI");
+    }
+}

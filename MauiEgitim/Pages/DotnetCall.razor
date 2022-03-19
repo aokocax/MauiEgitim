@@ -1,0 +1,49 @@
+﻿@page "/dotnetcall"
+@inject IJSRuntime JS
+<a href="/"> &lt; Back </a>
+<h2>DotnetCall</h2>
+
+
+<button onclick="@MethodForCallback">Callback test</button><br />
+
+
+<h3>@title</h3>
+<button onclick="@MethodForCallbackWithParams">Callback test with parameters</button>
+@code {
+    public static string title { get; set; }
+
+
+    async void MethodForCallback()
+    {
+        await JS.InvokeVoidAsync("CallDotnetMethod");
+    }
+
+
+    [JSInvokable]
+    public static void DotnetMethod()
+    {
+        Console.WriteLine("called");
+    }
+
+
+
+
+
+
+    private DotNetObjectReference<DotnetCall> objRef;
+    async void MethodForCallbackWithParams()
+    {
+        await JS.InvokeVoidAsync("CallDotnetMethodWithParameter", DotNetObjectReference.Create(this));
+    }
+    [JSInvokable]
+    public void DotnetMethodWithParams(string message)
+    {
+           title = message;
+          StateHasChanged();
+    }
+    public void Dispose()
+    {
+        objRef?.Dispose();
+    }
+  
+}
